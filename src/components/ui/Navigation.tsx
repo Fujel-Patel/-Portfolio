@@ -33,9 +33,8 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'glass py-4' : 'py-6'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass py-4' : 'py-6'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <motion.a
@@ -47,18 +46,18 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
           </motion.a>
 
           <div className="hidden md:flex items-center gap-8">
-  {navItems.map((item) => (
-    <motion.button
-      key={item.name}
-      onClick={() => onNavigate && onNavigate(item.section)}
-      className={`text-sm transition-colors relative group px-2 py-1 rounded focus:outline-none ${activeSection === item.section ? 'text-cyan-400 font-bold' : 'text-gray-300 hover:text-white'}`}
-      whileHover={{ y: -2 }}
-    >
-      {item.name}
-      <span className={`absolute -bottom-1 left-0 h-0.5 bg-cyan-400 transition-all ${activeSection === item.section ? 'w-full' : 'w-0'} group-hover:w-full`} />
-    </motion.button>
-  ))}
-</div>
+            {navItems.map((item) => (
+              <motion.button
+                key={item.name}
+                onClick={() => onNavigate?.(item.section)}
+                className={`text-sm transition-colors relative group px-2 py-1 rounded focus:outline-none ${activeSection === item.section ? 'text-cyan-400 font-bold' : 'text-gray-300 hover:text-white'}`}
+                whileHover={{ y: -2 }}
+              >
+                {item.name}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-cyan-400 transition-all ${activeSection === item.section ? 'w-full' : 'w-0'} group-hover:w-full`} />
+              </motion.button>
+            ))}
+          </div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -79,18 +78,18 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navItems.map((item) => (
-  <motion.button
-    key={item.name}
-    onClick={() => {
-      onNavigate && onNavigate(item.section)
-      setIsOpen(false)
-    }}
-    className={`text-2xl transition-colors px-4 py-2 rounded focus:outline-none ${activeSection === item.section ? 'text-cyan-400 font-bold' : 'text-white hover:text-cyan-400'}`}
-    whileHover={{ scale: 1.1 }}
-  >
-    {item.name}
-  </motion.button>
-))}
+                <motion.button
+                  key={item.name}
+                  onClick={() => {
+                    onNavigate?.(item.section)
+                    setIsOpen(false)
+                  }}
+                  className={`text-2xl transition-colors px-4 py-2 rounded focus:outline-none ${activeSection === item.section ? 'text-cyan-400 font-bold' : 'text-white hover:text-cyan-400'}`}
+                  whileHover={{ scale: 1.1 }}
+                >
+                  {item.name}
+                </motion.button>
+              ))}
             </div>
           </motion.div>
         )}

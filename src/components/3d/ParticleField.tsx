@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 import { useRef, useMemo, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -5,17 +6,17 @@ import * as THREE from 'three'
 export default function ParticleField() {
   const pointsRef = useRef<THREE.Points>(null)
   const [particleCount, setParticleCount] = useState(500)
-  
+
   // Detect mobile device and reduce particles
   useEffect(() => {
     const isMobile = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768
     setParticleCount(isMobile ? 200 : 500)
-    
+
     const handleResize = () => {
       const isMobileNow = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768
       setParticleCount(isMobileNow ? 200 : 500)
     }
-    
+
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -53,7 +54,7 @@ export default function ParticleField() {
       // Base rotation
       pointsRef.current.rotation.y = state.clock.elapsedTime * 0.015
       pointsRef.current.rotation.x = state.clock.elapsedTime * 0.008
-      
+
       // Mouse interaction: gentle shift
       pointsRef.current.rotation.y += state.mouse.x * 0.2
       pointsRef.current.rotation.x += state.mouse.y * 0.2

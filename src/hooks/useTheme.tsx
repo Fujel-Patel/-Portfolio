@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from 'react'
 
 type Theme = 'dark' | 'light'
@@ -10,23 +11,22 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark')
-
-  useEffect(() => {
-    // Check for saved theme preference or default to 'dark'
+  const [theme, setTheme] = useState<Theme>(() => {
+    // Check for saved theme preference or default to 'dark' lazily
     const savedTheme = localStorage.getItem('theme') as Theme
     if (savedTheme) {
-      setTheme(savedTheme)
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      setTheme('light')
+      return savedTheme
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      return 'light'
     }
-  }, [])
+    return 'dark'
+  })
 
   useEffect(() => {
     // Apply theme class to document
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem('theme', theme)
-    
+
     // Update body background
     if (theme === 'light') {
       document.body.style.backgroundColor = '#ffffff'

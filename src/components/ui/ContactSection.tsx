@@ -36,11 +36,11 @@ export default function ContactSection() {
           message: formData.message,
         }
       )
-      
+
       setStatus('success')
       setStatusMessage('Message sent successfully! I\'ll get back to you soon.')
       setFormData({ name: '', email: '', message: '' })
-    } catch (error) {
+    } catch {
       setStatus('error')
       setStatusMessage('Failed to send message. Please try again or email me directly.')
     } finally {
@@ -131,23 +131,22 @@ export default function ContactSection() {
                   required
                 />
               </div>
-              
+
               {/* Status Message */}
               {status !== 'idle' && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex items-center gap-2 p-4 rounded-xl ${
-                    status === 'success' 
-                      ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                  className={`flex items-center gap-2 p-4 rounded-xl ${status === 'success'
+                      ? 'bg-green-500/20 text-green-400 border border-green-500/30'
                       : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                  }`}
+                    }`}
                 >
                   {status === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
                   <span className="text-sm">{statusMessage}</span>
                 </motion.div>
               )}
-              
+
               <motion.button
                 type="submit"
                 disabled={isLoading}
@@ -167,7 +166,7 @@ export default function ContactSection() {
                   </>
                 )}
               </motion.button>
-              
+
               <p className="text-xs text-gray-500 text-center">
                 Note: Replace YOUR_PUBLIC_KEY, YOUR_SERVICE_ID, and YOUR_TEMPLATE_ID in the code with your EmailJS credentials
               </p>
