@@ -50,8 +50,13 @@ export default function ParticleField() {
 
   useFrame((state) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02
-      pointsRef.current.rotation.x = state.clock.elapsedTime * 0.01
+      // Base rotation
+      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.015
+      pointsRef.current.rotation.x = state.clock.elapsedTime * 0.008
+      
+      // Mouse interaction: gentle shift
+      pointsRef.current.rotation.y += state.mouse.x * 0.2
+      pointsRef.current.rotation.x += state.mouse.y * 0.2
     }
   })
 

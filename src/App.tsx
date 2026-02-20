@@ -1,8 +1,6 @@
 import { Suspense, lazy } from 'react'
-import { useEffect, useState } from 'react'
-import Lenis from 'lenis'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ThemeProvider } from './hooks/useTheme'
 import Scene from './components/3d/Scene'
 import Navigation from './components/ui/Navigation'
@@ -18,8 +16,6 @@ const SkillsSection = lazy(() => import('./components/ui/SkillsSection'))
 const BlogSection = lazy(() => import('./components/ui/BlogSection'))
 const ContactSection = lazy(() => import('./components/ui/ContactSection'))
 
-gsap.registerPlugin(ScrollTrigger)
-
 // Loading fallback component
 function SectionLoader() {
   return (
@@ -33,63 +29,18 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [activeSection, setActiveSection] = useState('home')
 
-  useEffect(() => {
-    // Only initialize Lenis after loading is complete
-    if (!isLoading) {
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-      })
+  // Navigation click handler
+  const handleNav = (section: string) => {
+    setActiveSection(section)
+  }
 
-      lenis.on('scroll', ScrollTrigger.update)
-
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000)
-      })
-
-      gsap.ticker.lagSmoothing(0)
-
-      return () => {
-        lenis.destroy()
-      }
-    }
-  }, [isLoading])
-
-  // Swipe/gesture navigation
-  useEffect(() => {
-    if (isLoading) return
-    let startX = 0
-    let endX = 0
-    const handleTouchStart = (e: TouchEvent) => {
-      startX = e.touches[0].clientX
-    }
-    const handleTouchEnd = (e: TouchEvent) => {
-      endX = e.changedTouches[0].clientX
-      const dx = endX - startX
-      if (Math.abs(dx) > 60) {
-        const sections = ['home', 'about', 'projects', 'skills', 'blog', 'contact']
-        const idx = sections.indexOf(activeSection)
-        if (dx < 0 && idx < sections.length - 1) setActiveSection(sections[idx + 1])
-        if (dx > 0 && idx > 0) setActiveSection(sections[idx - 1])
-      }
-    }
-    window.addEventListener('touchstart', handleTouchStart)
-    window.addEventListener('touchend', handleTouchEnd)
-    return () => {
-      window.removeEventListener('touchstart', handleTouchStart)
-      window.removeEventListener('touchend', handleTouchEnd)
-    }
-  }, [activeSection, isLoading])
+  const handleNodeClick = (id: string) => {
+    setActiveSection(id)
+  }
 
   const handleLoadingComplete = () => {
     setIsLoading(false)
   }
-
-  // Navigation click handler
-  const handleNav = (section: string) => setActiveSection(section)
 
   return (
     <ThemeProvider>
@@ -103,39 +54,103 @@ function App() {
       {!isLoading && <ThemeToggle />}
       
       {/* Main Content */}
-      <div className={`relative min-h-screen transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="fixed inset-0 z-0 h-screen w-full">
-          <Scene />
+      <div className={`relative h-screen w-full transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        {/* 3D Scene Foundation */}
+        <div className="fixed inset-0 z-0">
+          <Scene activeSection={activeSection} onNodeClick={handleNodeClick} />
         </div>
         
-        <div className="relative z-10">
-          <Navigation onNavigate={handleNav} activeSection={activeSection} />
-          {activeSection === 'home' && <HeroSection />}
-          {activeSection === 'about' && (
-            <Suspense fallback={<SectionLoader />}>
-              <AboutSection />
-            </Suspense>
-          )}
-          {activeSection === 'projects' && (
-            <Suspense fallback={<SectionLoader />}>
-              <ProjectsSection />
-            </Suspense>
-          )}
-          {activeSection === 'skills' && (
-            <Suspense fallback={<SectionLoader />}>
-              <SkillsSection />
-            </Suspense>
-          )}
-          {activeSection === 'blog' && (
-            <Suspense fallback={<SectionLoader />}>
-              <BlogSection />
-            </Suspense>
-          )}
-          {activeSection === 'contact' && (
-            <Suspense fallback={<SectionLoader />}>
-              <ContactSection />
-            </Suspense>
-          )}
+        {/* UI Overlay Layer */}
+        <div className="relative z-10 pointer-events-none h-full w-full">
+          <div className="pointer-events-auto">
+            <Navigation onNavigate={handleNav} activeSection={activeSection} />
+          </div>
+
+          <AnimatePresence mode="wait">
+            {activeSection === 'home' && (
+              <motion.div
+                key="home"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <div className="pointer-events-auto">
+                   <HeroSection />
+                </div>
+              </motion.div>
+            )}
+
+            {activeSection === 'projects' && (
+              <motion.div
+                key="projects"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                className="absolute inset-0 z-20 overflow-y-auto pointer-events-auto pt-24"
+              >
+                <Suspense fallback={<SectionLoader />}>
+                  <ProjectsSection />
+                </Suspense>
+              </motion.div>
+            )}
+
+            {activeSection === 'about' && (
+              <motion.div
+                key="about"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                className="absolute inset-0 z-20 overflow-y-auto pointer-events-auto pt-24"
+              >
+                <Suspense fallback={<SectionLoader />}>
+                  <AboutSection />
+                </Suspense>
+              </motion.div>
+            )}
+
+            {activeSection === 'skills' && (
+              <motion.div
+                key="skills"
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+                className="absolute inset-0 z-20 overflow-y-auto pointer-events-auto pt-24"
+              >
+                <Suspense fallback={<SectionLoader />}>
+                  <SkillsSection />
+                </Suspense>
+              </motion.div>
+            )}
+
+            {activeSection === 'blog' && (
+              <motion.div
+                key="blog"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 z-20 overflow-y-auto pointer-events-auto pt-24"
+              >
+                <Suspense fallback={<SectionLoader />}>
+                  <BlogSection />
+                </Suspense>
+              </motion.div>
+            )}
+
+            {activeSection === 'contact' && (
+              <motion.div
+                key="contact"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.1 }}
+                className="absolute inset-0 z-20 overflow-y-auto pointer-events-auto pt-24"
+              >
+                <Suspense fallback={<SectionLoader />}>
+                  <ContactSection />
+                </Suspense>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </ThemeProvider>
