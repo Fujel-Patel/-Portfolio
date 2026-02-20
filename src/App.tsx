@@ -46,20 +46,22 @@ function App() {
     <ThemeProvider>
       {/* Loading Screen */}
       <LoadingScreen onLoadingComplete={handleLoadingComplete} />
-      
+
       {/* Custom Cursor (desktop only) */}
       {!isLoading && <CustomCursor />}
-      
+
       {/* Theme Toggle */}
       {!isLoading && <ThemeToggle />}
-      
+
       {/* Main Content */}
-      <div className={`relative h-screen w-full transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+      <div
+        className={`relative h-screen w-full transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+      >
         {/* 3D Scene Foundation */}
         <div className="fixed inset-0 z-0">
           <Scene activeSection={activeSection} onNodeClick={handleNodeClick} />
         </div>
-        
+
         {/* UI Overlay Layer */}
         <div className="relative z-10 pointer-events-none h-full w-full">
           <div className="pointer-events-auto">
@@ -76,7 +78,7 @@ function App() {
                 className="absolute inset-0 flex items-center justify-center pointer-events-none"
               >
                 <div className="pointer-events-auto">
-                   <HeroSection />
+                  <HeroSection />
                 </div>
               </motion.div>
             )}

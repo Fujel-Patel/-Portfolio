@@ -25,14 +25,8 @@
 3. Use this template structure:
 
 ```html
-Subject: New Contact Form Message from {{from_name}}
-
-From: {{from_name}} ({{from_email}})
-Message:
-{{message}}
-
----
-Sent from your portfolio website
+Subject: New Contact Form Message from {{from_name}} From: {{from_name}} ({{from_email}}) Message:
+{{message}} --- Sent from your portfolio website
 ```
 
 4. Save the template
@@ -54,8 +48,8 @@ emailjs.init('YOUR_PUBLIC_KEY_HERE')
 
 // Line 24-25: Replace with your Service ID and Template ID
 await emailjs.send(
-  'YOUR_SERVICE_ID_HERE',     // e.g., 'service_abc123'
-  'YOUR_TEMPLATE_ID_HERE',    // e.g., 'template_xyz789'
+  'YOUR_SERVICE_ID_HERE', // e.g., 'service_abc123'
+  'YOUR_TEMPLATE_ID_HERE', // e.g., 'template_xyz789'
   {
     from_name: formData.name,
     from_email: formData.email,
@@ -75,16 +69,19 @@ await emailjs.send(
 ## Troubleshooting
 
 **Form not sending?**
+
 - Check browser console for errors
 - Verify all IDs are correct
 - Ensure EmailJS service is active
 - Check spam folder
 
 **Getting CORS errors?**
+
 - Make sure you're testing on localhost or a deployed domain
 - EmailJS allows localhost for testing
 
 **Template variables not working?**
+
 - Ensure variable names match exactly: `{{from_name}}`, `{{from_email}}`, `{{message}}`
 - Variables are case-sensitive
 
@@ -95,6 +92,7 @@ await emailjs.send(
 For production, use environment variables:
 
 1. Create `.env` file in your project root:
+
 ```
 VITE_EMAILJS_PUBLIC_KEY=your_public_key
 VITE_EMAILJS_SERVICE_ID=your_service_id
@@ -102,6 +100,7 @@ VITE_EMAILJS_TEMPLATE_ID=your_template_id
 ```
 
 2. Update ContactSection.tsx:
+
 ```typescript
 emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
 

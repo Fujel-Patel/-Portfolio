@@ -49,7 +49,9 @@ export default function HeroSection() {
         <h1 className="hero-text text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold tracking-tighter mb-8 leading-[0.9] drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
           <span className="text-white mix-blend-plus-lighter inline-block">Fujel</span>
           <br />
-          <span className="text-white mix-blend-plus-lighter inline-block opacity-90 font-black">Patel</span>
+          <span className="text-white mix-blend-plus-lighter inline-block opacity-90 font-black">
+            Patel
+          </span>
         </h1>
 
         <motion.div
@@ -88,9 +90,11 @@ export default function HeroSection() {
           href="#about"
           className="flex flex-col items-center gap-2 group glass-morphism border border-white/5 px-6 py-4 rounded-3xl"
           animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
         >
-          <span className="text-[10px] uppercase tracking-[0.4em] text-white/60 group-hover:text-cyan-400 font-bold transition-colors">Scroll</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] text-white/60 group-hover:text-cyan-400 font-bold transition-colors">
+            Scroll
+          </span>
           <div className="w-[2px] h-12 bg-gradient-to-b from-cyan-400 to-transparent rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
         </motion.a>
       </motion.div>

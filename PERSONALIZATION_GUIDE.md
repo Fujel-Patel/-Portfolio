@@ -27,7 +27,7 @@ This file contains all the placeholders you need to customize. Replace each sect
 // Line 63-73 - Social Media Links
 // Replace # with your actual profile URLs:
 // GitHub: https://github.com/yourusername
-// LinkedIn: https://linkedin.com/in/yourusername  
+// LinkedIn: https://linkedin.com/in/yourusername
 // Twitter: https://twitter.com/yourusername
 ```
 
@@ -36,7 +36,7 @@ This file contains all the placeholders you need to customize. Replace each sect
 ```typescript
 // Line 23-29 - About description
 <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-  YOUR_BIO_HERE - Write 2-3 sentences about yourself, your experience, 
+  YOUR_BIO_HERE - Write 2-3 sentences about yourself, your experience,
   and what makes you unique as a developer.
 </p>
 
@@ -56,11 +56,13 @@ const features = [
 
 ```typescript
 // Lines 43-45 - Update your actual contact info
-{[
-  { icon: Mail, label: 'Email', value: 'your.email@example.com' },
-  { icon: Phone, label: 'Phone', value: 'YOUR_PHONE_NUMBER' },
-  { icon: MapPin, label: 'Location', value: 'YOUR_CITY, COUNTRY' },
-]}
+{
+  ;[
+    { icon: Mail, label: 'Email', value: 'your.email@example.com' },
+    { icon: Phone, label: 'Phone', value: 'YOUR_PHONE_NUMBER' },
+    { icon: MapPin, label: 'Location', value: 'YOUR_CITY, COUNTRY' },
+  ]
+}
 ```
 
 ## 🎨 Projects (`src/components/ui/ProjectsSection.tsx`)
@@ -75,11 +77,7 @@ const projects = [
     fullDescription: 'Detailed description (2-3 sentences)',
     tags: ['Tech1', 'Tech2', 'Tech3'],
     technologies: ['Detailed', 'tech', 'stack', 'used'],
-    features: [
-      'Key feature 1',
-      'Key feature 2',
-      'Key feature 3',
-    ],
+    features: ['Key feature 1', 'Key feature 2', 'Key feature 3'],
     image: 'bg-gradient-to-br from-cyan-500/20 to-blue-500/20',
     githubUrl: 'https://github.com/yourusername/repo',
     demoUrl: 'https://your-demo-link.com',
@@ -137,9 +135,9 @@ To change the color scheme, edit `src/index.css`:
 
 ```css
 /* Primary colors */
---color-accent-cyan: #00d4ff;    /* Change this */
+--color-accent-cyan: #00d4ff; /* Change this */
 --color-accent-magenta: #ff00a0; /* Change this */
---color-accent-purple: #7000ff;  /* Change this */
+--color-accent-purple: #7000ff; /* Change this */
 ```
 
 ## 📝 Quick Checklist

@@ -54,7 +54,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               <div className="absolute inset-2 border-2 border-magenta-500/30 rounded-full rotate-45" />
               <div className="absolute inset-4 border-2 border-purple-500/30 rounded-full" />
             </motion.div>
-            
+
             {/* Center text */}
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-4xl font-bold text-gradient">P</span>

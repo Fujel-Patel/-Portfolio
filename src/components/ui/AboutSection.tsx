@@ -39,9 +39,9 @@ export default function AboutSection() {
             <span className="text-gradient"> digital experiences</span>
           </h3>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            I'm a creative developer specializing in building immersive web applications 
-            with modern technologies. I love combining technical expertise with creative 
-            design to deliver exceptional user experiences.
+            I'm a creative developer specializing in building immersive web applications with modern
+            technologies. I love combining technical expertise with creative design to deliver
+            exceptional user experiences.
           </p>
         </motion.div>
 

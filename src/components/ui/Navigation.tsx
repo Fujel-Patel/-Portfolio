@@ -33,8 +33,9 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass py-4' : 'py-6'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'glass py-4' : 'py-6'
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <motion.a
@@ -54,15 +55,14 @@ export default function Navigation({ onNavigate, activeSection }: NavigationProp
                 whileHover={{ y: -2 }}
               >
                 {item.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-cyan-400 transition-all ${activeSection === item.section ? 'w-full' : 'w-0'} group-hover:w-full`} />
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-cyan-400 transition-all ${activeSection === item.section ? 'w-full' : 'w-0'} group-hover:w-full`}
+                />
               </motion.button>
             ))}
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-white">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>

@@ -26,8 +26,8 @@ export default function FloatingShapes() {
     return items.map((item, i) => {
       // Golden ratio distribution for a more organic spherical layout
       const goldenRatio = (1 + Math.sqrt(5)) / 2
-      const theta = 2 * Math.PI * i / goldenRatio
-      const phi = Math.acos(1 - 2 * (i + 0.5) / items.length)
+      const theta = (2 * Math.PI * i) / goldenRatio
+      const phi = Math.acos(1 - (2 * (i + 0.5)) / items.length)
 
       const radius = baseRadius + Math.random() * 1.5
 
@@ -66,8 +66,18 @@ export default function FloatingShapes() {
       const scrollRotationX = (scrollY.current * 0.0005) % (Math.PI * 2)
 
       // Dampening for ultra-smooth movement (lower factor = softer stop)
-      targetRotation.current.x = THREE.MathUtils.damp(targetRotation.current.x, mouseY + scrollRotationX, 2.5, delta)
-      targetRotation.current.y = THREE.MathUtils.damp(targetRotation.current.y, mouseX + scrollRotationY, 2.5, delta)
+      targetRotation.current.x = THREE.MathUtils.damp(
+        targetRotation.current.x,
+        mouseY + scrollRotationX,
+        2.5,
+        delta
+      )
+      targetRotation.current.y = THREE.MathUtils.damp(
+        targetRotation.current.y,
+        mouseX + scrollRotationY,
+        2.5,
+        delta
+      )
 
       // Apply dampened targets with continuous subtle orbital time drift
       groupRef.current.rotation.x = targetRotation.current.x + Math.sin(time * 0.1) * 0.1

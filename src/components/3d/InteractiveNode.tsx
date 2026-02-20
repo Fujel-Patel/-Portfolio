@@ -18,18 +18,18 @@ export default function InteractiveNode({
   id,
   isActive,
   onClick,
-  color = '#00d4ff'
+  color = '#00d4ff',
 }: InteractiveNodeProps) {
   const meshRef = useRef<THREE.Mesh>(null)
   const [hovered, setHovered] = useState(false)
   const { size } = useThree()
-  
+
   const isMobile = size.width < 768
   const baseScale = isMobile ? 1.5 : 1
 
   useFrame((state) => {
     if (!meshRef.current) return
-    
+
     // Gentle rotation
     meshRef.current.rotation.y += 0.01
     meshRef.current.rotation.z += 0.005
@@ -37,7 +37,7 @@ export default function InteractiveNode({
     // Scale interpolation
     const targetScale = (hovered || isActive ? 1.5 : 1) * baseScale
     meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1)
-    
+
     // Hover effect: slight pulse
     if (hovered && !isActive) {
       meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 2) * 0.1
@@ -74,23 +74,18 @@ export default function InteractiveNode({
 
       {/* Label */}
       <Html position={[0, 1.5, 0]} center distanceFactor={10}>
-        <div className={`px-4 py-2 rounded-full glass border transition-all duration-300 pointer-events-none whitespace-nowrap ${
-          hovered || isActive ? 'border-cyan-400 opacity-100' : 'border-white/10 opacity-50'
-        }`}>
-          <span className="text-white font-bold text-sm tracking-widest uppercase">
-            {title}
-          </span>
+        <div
+          className={`px-4 py-2 rounded-full glass border transition-all duration-300 pointer-events-none whitespace-nowrap ${
+            hovered || isActive ? 'border-cyan-400 opacity-100' : 'border-white/10 opacity-50'
+          }`}
+        >
+          <span className="text-white font-bold text-sm tracking-widest uppercase">{title}</span>
         </div>
       </Html>
 
       {/* Large background text when active */}
       {isActive && (
-        <Text
-          position={[0, 0, -2]}
-          fontSize={2}
-          color="white"
-          fillOpacity={0.1}
-        >
+        <Text position={[0, 0, -2]} fontSize={2} color="white" fillOpacity={0.1}>
           {title.toUpperCase()}
         </Text>
       )}

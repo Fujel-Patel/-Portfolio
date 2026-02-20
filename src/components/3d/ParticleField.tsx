@@ -71,13 +71,7 @@ export default function ParticleField() {
 
   return (
     <points ref={pointsRef} geometry={geometry}>
-      <pointsMaterial
-        size={0.05}
-        vertexColors
-        transparent
-        opacity={0.8}
-        sizeAttenuation
-      />
+      <pointsMaterial size={0.05} vertexColors transparent opacity={0.8} sizeAttenuation />
     </points>
   )
 }

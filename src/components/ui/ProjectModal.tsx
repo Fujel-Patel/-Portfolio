@@ -75,7 +75,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   </div>
 
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h2>
-                  
+
                   <p className="text-gray-400 text-lg mb-8 leading-relaxed">
                     {project.fullDescription || project.description}
                   </p>
@@ -98,7 +98,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   {/* Technologies */}
                   {project.technologies && (
                     <div className="mb-8">
-                      <h3 className="text-xl font-semibold mb-4 text-cyan-400">Technologies Used</h3>
+                      <h3 className="text-xl font-semibold mb-4 text-cyan-400">
+                        Technologies Used
+                      </h3>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech) => (
                           <span

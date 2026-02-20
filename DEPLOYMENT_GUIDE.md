@@ -3,28 +3,34 @@
 ## Option 1: Deploy via Vercel CLI (Recommended)
 
 ### Step 1: Install Vercel CLI
+
 ```bash
 npm i -g vercel
 ```
 
 ### Step 2: Login to Vercel
+
 ```bash
 vercel login
 ```
+
 Follow the prompts to authenticate.
 
 ### Step 3: Deploy
+
 ```bash
 cd c:/Users/fujel/Documents/portfolio
 vercel
 ```
 
 The CLI will guide you through:
+
 - Project name
 - Directory confirmation
 - Build settings (auto-detected)
 
 ### Step 4: Production Deploy
+
 ```bash
 vercel --prod
 ```
@@ -32,12 +38,14 @@ vercel --prod
 ## Option 2: Deploy via Git (Automatic)
 
 ### Step 1: Create GitHub Repository
+
 1. Go to https://github.com/new
 2. Name your repository (e.g., "my-3d-portfolio")
 3. Make it public or private
 4. Do NOT initialize with README (we have one)
 
 ### Step 2: Push Your Code
+
 ```bash
 cd c:/Users/fujel/Documents/portfolio
 
@@ -58,13 +66,16 @@ git push -u origin main
 ```
 
 ### Step 3: Connect to Vercel
+
 1. Go to https://vercel.com/new
 2. Import your GitHub repository
 3. Vercel will auto-detect Vite + React settings
 4. Click "Deploy"
 
 ### Step 4: Configure Build Settings
+
 In Vercel dashboard:
+
 - **Framework Preset**: Vite
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
@@ -73,6 +84,7 @@ In Vercel dashboard:
 ## Option 3: Drag & Drop (Quickest)
 
 1. Run build locally:
+
 ```bash
 cd c:/Users/fujel/Documents/portfolio
 npm run build
@@ -105,11 +117,13 @@ npm run build
 ### Analytics
 
 1. Install Vercel Analytics:
+
 ```bash
 npm install @vercel/analytics
 ```
 
 2. Add to `src/App.tsx`:
+
 ```typescript
 import { Analytics } from '@vercel/analytics/react'
 
@@ -120,6 +134,7 @@ import { Analytics } from '@vercel/analytics/react'
 ## 🚀 Automatic Deployments
 
 With Git integration:
+
 - Push to `main` branch → Auto-deploy to Production
 - Push to other branches → Preview deployments
 - Pull requests → Preview deployments with unique URLs
@@ -127,6 +142,7 @@ With Git integration:
 ## 📊 Monitoring
 
 ### Vercel Dashboard
+
 - View deployment logs
 - Check performance metrics
 - Monitor bandwidth usage
@@ -135,6 +151,7 @@ With Git integration:
 ### Custom Scripts
 
 Add to `package.json`:
+
 ```json
 {
   "scripts": {
@@ -154,6 +171,7 @@ Add to `package.json`:
 ## 💰 Pricing
 
 **Free Tier Includes:**
+
 - Unlimited static sites
 - 100GB bandwidth/month
 - 6,000 build minutes/month
@@ -166,21 +184,25 @@ Perfect for portfolios!
 ## 🆘 Troubleshooting
 
 **Build fails?**
+
 - Check `vercel.json` is correct
 - Verify `dist` folder is created
 - Check build logs in Vercel dashboard
 
 **Assets not loading?**
+
 - Ensure base path is correct in `vite.config.ts`
 - Check all imports use relative paths
 
 **404 errors?**
+
 - `vercel.json` routes configuration handles SPA routing
 - Verify file is present in `dist` folder
 
 ## 🎉 Success!
 
 Your portfolio will be live at:
+
 - `https://your-project.vercel.app` (default)
 - `https://yourdomain.com` (custom domain)
 

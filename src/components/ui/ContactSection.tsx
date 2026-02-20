@@ -38,7 +38,7 @@ export default function ContactSection() {
       )
 
       setStatus('success')
-      setStatusMessage('Message sent successfully! I\'ll get back to you soon.')
+      setStatusMessage("Message sent successfully! I'll get back to you soon.")
       setFormData({ name: '', email: '', message: '' })
     } catch {
       setStatus('error')
@@ -137,10 +137,11 @@ export default function ContactSection() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`flex items-center gap-2 p-4 rounded-xl ${status === 'success'
+                  className={`flex items-center gap-2 p-4 rounded-xl ${
+                    status === 'success'
                       ? 'bg-green-500/20 text-green-400 border border-green-500/30'
                       : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                    }`}
+                  }`}
                 >
                   {status === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
                   <span className="text-sm">{statusMessage}</span>
@@ -168,7 +169,8 @@ export default function ContactSection() {
               </motion.button>
 
               <p className="text-xs text-gray-500 text-center">
-                Note: Replace YOUR_PUBLIC_KEY, YOUR_SERVICE_ID, and YOUR_TEMPLATE_ID in the code with your EmailJS credentials
+                Note: Replace YOUR_PUBLIC_KEY, YOUR_SERVICE_ID, and YOUR_TEMPLATE_ID in the code
+                with your EmailJS credentials
               </p>
             </div>
           </motion.form>

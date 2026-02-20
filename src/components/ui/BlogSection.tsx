@@ -17,7 +17,8 @@ const blogPosts: BlogPost[] = [
   {
     id: 1,
     title: 'Building Immersive 3D Experiences with React Three Fiber',
-    excerpt: 'Learn how to create stunning 3D web applications using React Three Fiber and Three.js.',
+    excerpt:
+      'Learn how to create stunning 3D web applications using React Three Fiber and Three.js.',
     content: `
       <p>React Three Fiber (R3F) is a powerful React renderer for Three.js that makes creating 3D web experiences incredibly intuitive.</p>
       
@@ -41,7 +42,7 @@ const blogPosts: BlogPost[] = [
     date: '2024-01-15',
     readTime: '5 min read',
     category: '3D Development',
-    tags: ['React', 'Three.js', 'WebGL', 'Tutorial']
+    tags: ['React', 'Three.js', 'WebGL', 'Tutorial'],
   },
   {
     id: 2,
@@ -74,7 +75,7 @@ const blogPosts: BlogPost[] = [
     date: '2024-01-10',
     readTime: '4 min read',
     category: 'Animation',
-    tags: ['GSAP', 'Framer Motion', 'Animation', 'React']
+    tags: ['GSAP', 'Framer Motion', 'Animation', 'React'],
   },
   {
     id: 3,
@@ -100,8 +101,8 @@ const blogPosts: BlogPost[] = [
     date: '2024-01-05',
     readTime: '6 min read',
     category: 'Performance',
-    tags: ['Performance', 'Optimization', 'Web Development']
-  }
+    tags: ['Performance', 'Optimization', 'Web Development'],
+  },
 ]
 
 export default function BlogSection() {
@@ -151,9 +152,7 @@ export default function BlogSection() {
                   </h4>
 
                   {/* Excerpt */}
-                  <p className="text-gray-400 mb-4 flex-grow">
-                    {post.excerpt}
-                  </p>
+                  <p className="text-gray-400 mb-4 flex-grow">{post.excerpt}</p>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -233,8 +232,8 @@ export default function BlogSection() {
                   {/* Content */}
                   <div className="p-8">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">{selectedPost.title}</h2>
-                    
-                    <div 
+
+                    <div
                       className="prose prose-invert max-w-none"
                       dangerouslySetInnerHTML={{ __html: selectedPost.content }}
                     />

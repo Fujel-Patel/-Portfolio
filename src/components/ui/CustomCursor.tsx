@@ -37,7 +37,7 @@ export default function CustomCursor() {
     const interactiveElements = document.querySelectorAll(
       'a, button, [role="button"], input, textarea, .cursor-hover'
     )
-    
+
     interactiveElements.forEach((el) => {
       el.addEventListener('mouseenter', handleElementHover)
       el.addEventListener('mouseleave', handleElementLeave)
@@ -47,7 +47,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', moveCursor)
       document.removeEventListener('mouseenter', handleMouseEnter)
       document.removeEventListener('mouseleave', handleMouseLeave)
-      
+
       interactiveElements.forEach((el) => {
         el.removeEventListener('mouseenter', handleElementHover)
         el.removeEventListener('mouseleave', handleElementLeave)

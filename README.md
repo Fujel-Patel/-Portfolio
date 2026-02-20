@@ -7,6 +7,7 @@ A stunning, interactive 3D portfolio built with React, Three.js, and modern web 
 ## ✨ Features
 
 ### 🎮 3D Interactive Experience
+
 - **React Three Fiber** powered 3D scene
 - Floating animated geometric shapes
 - 500-particle background system (reduced to 200 on mobile)
@@ -14,6 +15,7 @@ A stunning, interactive 3D portfolio built with React, Three.js, and modern web 
 - Dynamic lighting with colored lights
 
 ### 🎨 Design
+
 - **Glassmorphism** UI design
 - **Cyan-Magenta-Purple** gradient accents
 - Smooth scroll with Lenis
@@ -21,12 +23,14 @@ A stunning, interactive 3D portfolio built with React, Three.js, and modern web 
 - Custom cursor with trail effect (desktop only)
 
 ### 📱 Responsive
+
 - Mobile-first responsive design
 - Touch-optimized interactions
 - Adaptive 3D performance
 - Works on all device sizes
 
 ### 🛠️ Sections
+
 1. **Hero** - Eye-catching introduction with 3D background
 2. **About** - Personal bio with feature cards
 3. **Projects** - Portfolio showcase with detail modals
@@ -35,6 +39,7 @@ A stunning, interactive 3D portfolio built with React, Three.js, and modern web 
 6. **Contact** - Functional contact form with EmailJS
 
 ### 🌓 Theme Support
+
 - Dark/Light mode toggle
 - Persistent theme preference
 - Smooth theme transitions
@@ -42,6 +47,7 @@ A stunning, interactive 3D portfolio built with React, Three.js, and modern web 
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 
@@ -74,6 +80,7 @@ The contact form uses EmailJS to send emails without a backend.
 **Step 2:** Create an Email Service (Gmail, Outlook, etc.)
 
 **Step 3:** Create an Email Template:
+
 ```
 Subject: New Contact Form Message from {{from_name}}
 
@@ -85,18 +92,15 @@ Message:
 **Step 4:** Get your credentials from the EmailJS dashboard
 
 **Step 5:** Update `src/components/ui/ContactSection.tsx`:
+
 ```typescript
 emailjs.init('YOUR_PUBLIC_KEY')
 
-await emailjs.send(
-  'YOUR_SERVICE_ID',
-  'YOUR_TEMPLATE_ID',
-  {
-    from_name: formData.name,
-    from_email: formData.email,
-    message: formData.message,
-  }
-)
+await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+  from_name: formData.name,
+  from_email: formData.email,
+  message: formData.message,
+})
 ```
 
 Detailed guide: [EMAILJS_SETUP.md](./EMAILJS_SETUP.md)
@@ -144,11 +148,13 @@ vercel
 ### Option 2: Automated Scripts
 
 **Windows:**
+
 ```bash
 deploy.bat
 ```
 
 **Mac/Linux:**
+
 ```bash
 chmod +x deploy.sh
 ./deploy.sh
@@ -255,6 +261,7 @@ const blogPosts = [
 ## 🐛 Troubleshooting
 
 **Build fails?**
+
 ```bash
 # Clear cache
 rm -rf node_modules
@@ -263,16 +270,19 @@ npm install
 ```
 
 **3D scene not loading?**
+
 - Check browser console for WebGL errors
 - Ensure GPU acceleration is enabled
 - Try a different browser
 
 **Contact form not working?**
+
 - Verify EmailJS credentials
 - Check browser console for errors
 - Ensure form fields are filled
 
 **Custom cursor not showing?**
+
 - Only works on desktop (pointer: fine)
 - Hidden on touch devices automatically
 
@@ -300,6 +310,7 @@ Built with ❤️ and a lot of ☕
 ## 📞 Support
 
 Having issues? Check these resources:
+
 - [EmailJS Setup Guide](./EMAILJS_SETUP.md)
 - [Personalization Guide](./PERSONALIZATION_GUIDE.md)
 - [Deployment Guide](./DEPLOYMENT_GUIDE.md)
