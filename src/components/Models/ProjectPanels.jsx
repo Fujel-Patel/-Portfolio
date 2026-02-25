@@ -31,7 +31,7 @@ function ProjectPanel({ project, position, rotation, index, onSelect, isMobile }
     const targetY = position[1];
     const startY = prefersReducedMotion ? targetY : targetY - 3;
 
-    /* Animate entrance + hover lift */
+    /* Animate entrance + hover lift + slow float for background panels */
     useFrame((state, delta) => {
         if (!groupRef.current) return;
         if (prefersReducedMotion) return;
@@ -41,9 +41,10 @@ function ProjectPanel({ project, position, rotation, index, onSelect, isMobile }
         const goal = hovered ? targetY + 0.15 : targetY;
         groupRef.current.position.y = THREE.MathUtils.lerp(currentY, goal, delta * 3);
 
-        // Gentle idle float
+        // Gentle idle float (slower for background)
         const t = state.clock.getElapsedTime();
-        groupRef.current.position.y += Math.sin(t * 0.8 + index * 1.5) * 0.03;
+        groupRef.current.position.y += Math.sin(t * 0.3 + index * 1.5) * 0.06;
+        groupRef.current.rotation.z = Math.sin(t * 0.15 + index) * 0.01;
     });
 
     const handlePointerOver = useCallback((e) => {
@@ -93,6 +94,18 @@ function ProjectPanel({ project, position, rotation, index, onSelect, isMobile }
                     roughness={0.6}
                     emissive={accentColor}
                     emissiveIntensity={hovered ? 0.08 : 0.02}
+                    transparent
+                    opacity={0.82}
+                />
+                {/* Subtle blur overlay */}
+                <meshPhysicalMaterial
+                    transparent
+                    opacity={0.18}
+                    clearcoat={0.8}
+                    clearcoatRoughness={0.2}
+                    transmission={0.7}
+                    ior={1.2}
+                    thickness={0.12}
                 />
             </RoundedBox>
 

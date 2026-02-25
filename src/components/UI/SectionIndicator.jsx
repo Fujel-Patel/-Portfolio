@@ -51,7 +51,6 @@ export default function SectionIndicator() {
         >
             {SECTIONS.map((section, i) => {
                 const isActive = activeSection === section;
-
                 return (
                     <button
                         key={section}
@@ -66,15 +65,9 @@ export default function SectionIndicator() {
                     >
                         {/* Dot */}
                         <motion.div
-                            className={`
-                w-3 h-3 rounded-full border-2 transition-colors duration-300
-                ${isActive
-                                    ? 'bg-cyan-400 border-cyan-400 shadow-glow-cyan'
-                                    : 'bg-transparent border-dark-200 group-hover:border-cyan-400/50'
-                                }
-              `}
-                            animate={(!prefersReducedMotion && isActive) ? { scale: [1, 1.3, 1] } : { scale: 1 }}
-                            transition={(!prefersReducedMotion && isActive) ? { duration: 1.5, repeat: Infinity, ease: 'easeInOut' } : {}}
+                            className={`w-3 h-3 rounded-full border-2 transition-colors duration-300 ${isActive ? 'bg-cyan-400 border-cyan-400 shadow-[0_0_12px_2px_rgba(0,255,255,0.5)]' : 'bg-transparent border-dark-200 group-hover:border-cyan-400/50'}`}
+                            animate={(!prefersReducedMotion && isActive) ? { scale: 1.25, boxShadow: '0 0 18px 4px rgba(0,255,255,0.35)' } : { scale: 1 }}
+                            transition={(!prefersReducedMotion && isActive) ? { duration: 0.5, type: 'spring', stiffness: 300 } : {}}
                         />
 
                         {/* Tooltip label */}

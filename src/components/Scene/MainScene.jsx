@@ -15,7 +15,7 @@ import {
     FPSTracker,
     getRendererStats,
 } from '../../utils/performanceMonitor';
-
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 /* ── Lazy-loaded Konami secret scene ─────────────────── */
 const KonamiScene = lazy(() => import('./KonamiScene'));
@@ -215,6 +215,14 @@ export default function MainScene({ children, className = '', konamiActive = fal
 
                 {/* Scene content */}
                 <Suspense fallback={<FallbackLoader />}>
+                    {/* Soft bloom postprocessing for background panels */}
+                    <EffectComposer>
+                        <Bloom
+                            intensity={0.18}
+                            luminanceThreshold={0.12}
+                            luminanceSmoothing={0.18}
+                        />
+                    </EffectComposer>
                     {children}
 
                     {/* ── Konami secret scene (lazy) ──────── */}

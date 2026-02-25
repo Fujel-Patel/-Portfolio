@@ -101,7 +101,7 @@ export default function ProjectModal({ project, onClose }) {
                         initial={{ scale: prefersReducedMotion ? 1 : 0.85, y: prefersReducedMotion ? 0 : 40, opacity: 0 }}
                         animate={{ scale: 1, y: 0, opacity: 1 }}
                         exit={{ scale: prefersReducedMotion ? 1 : 0.85, y: prefersReducedMotion ? 0 : 40, opacity: 0 }}
-                        transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 300, damping: 28 }}
+                        transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 180, damping: 22 }}
                         role="document"
                     >
                         {/* Coloured top bar */}

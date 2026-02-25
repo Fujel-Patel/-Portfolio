@@ -145,7 +145,7 @@ export default function App() {
                 <h2 className="section-title text-4xl md:text-6xl mb-8 text-center">About Me</h2>
                 <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
                   <div className="flex justify-center">
-                    <div className="relative w-56 h-56 md:w-72 h-72">
+                    <div className="relative w-56 h-56 md:w-72 md:h-72">
                       <div className="absolute inset-0 rounded-full bg-cyan-500/10 blur-3xl" />
                       <div className="relative w-full h-full rounded-full border border-cyan-500/30 flex items-center justify-center bg-dark-800/50 backdrop-blur-md">
                         <span className="text-8xl">👨‍💻</span>
@@ -172,22 +172,75 @@ export default function App() {
           {activeSection === 'projects' && (
             <motion.section
               key="projects"
-              variants={fadeVariants}
-              initial="initial"
-              animate="enter"
-              exit="exit"
               className="h-full flex flex-col items-center justify-center p-6"
             >
               <div className="section-container text-center">
-                <h2 className="section-title text-4xl md:text-6xl mb-4">Projects</h2>
-                <p className="text-dark-100/50 mb-10">Select a project in the 3D scene to explore.</p>
-                <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-                  {projects.map((p) => (
-                    <button key={p.id} onClick={() => handleSelectProject(p.id)} className="glass-card p-6 text-left group">
-                      <h3 className="font-bold text-base mb-1" style={{ color: p.color }}>{p.title}</h3>
-                      <p className="text-dark-100/50 text-xs">{p.subtitle}</p>
-                    </button>
-                  ))}
+                <motion.h2
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  className="section-title text-4xl md:text-6xl mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent tracking-wide font-semibold"
+                >
+                  Projects
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+                  className="text-gray-300 mb-10"
+                >
+                  Select a project in the 3D scene to explore.
+                </motion.p>
+                <div className="mb-10" />
+                <div className="max-w-6xl mx-auto py-24">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 place-items-center">
+                      {projects.map((p) => (
+                        <motion.button
+                          key={p.id}
+                          onClick={() => handleSelectProject(p.id)}
+                          className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 text-left group transition-all duration-300 ease-out hover:scale-105 hover:shadow-[0_0_40px_rgba(0,255,255,0.2)] hover:border-cyan-400/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 w-full max-w-md mx-auto"
+                          whileTap={{ scale: 0.97 }}
+                          style={{ perspective: 800, outline: 'none', color: '#e0e0e0' }}
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`View project: ${p.title} — ${p.subtitle}`}
+                          onKeyDown={e => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              handleSelectProject(p.id);
+                            }
+                          }}
+                          onMouseMove={e => {
+                            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                            const card = e.currentTarget;
+                            const rect = card.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            const rotateY = ((x / rect.width) - 0.5) * 10;
+                            const rotateX = ((y / rect.height) - 0.5) * -10;
+                            card.style.transform = `scale(1) rotateX(${rotateX > 5 ? 5 : rotateX < -5 ? -5 : rotateX}deg) rotateY(${rotateY > 5 ? 5 : rotateY < -5 ? -5 : rotateY}deg)`;
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+                          }}
+                        >
+                          <span className="block mb-1">
+                            <span className="relative inline-block">
+                              <span
+                                className="text-lg font-semibold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500"
+                                style={{ color: p.color, textShadow: '0 1px 2px #000' }}
+                              >
+                                {p.title}
+                              </span>
+                              <span
+                                className="absolute left-0 bottom-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                              />
+                            </span>
+                          </span>
+                          <p className="text-sm text-gray-300 tracking-normal mb-1" style={{ color: '#b3b3b3' }}>{p.subtitle}</p>
+                        </motion.button>
+                      ))}
+                    </div>
                 </div>
               </div>
             </motion.section>

@@ -82,7 +82,7 @@ const HeroText = ({ onExploreWork }) => {
             {/* Main Heading */}
             <motion.h1
                 variants={itemVariants}
-                className="text-5xl md:text-7xl font-extrabold text-white mb-4 leading-tight"
+                className="text-5xl md:text-7xl font-bold tracking-[-0.02em] text-white mb-4 leading-tight"
             >
                 Hi, I'm <span className="text-white">Fujel</span>
             </motion.h1>
@@ -90,7 +90,7 @@ const HeroText = ({ onExploreWork }) => {
             {/* Sub Heading */}
             <motion.h2
                 variants={itemVariants}
-                className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+                className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-[#06b6d4] to-[#a855f7] bg-clip-text text-transparent"
             >
                 Full Stack Developer & 3D Web Designer
             </motion.h2>
